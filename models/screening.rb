@@ -12,10 +12,10 @@ class  Screening
   end
 
   def save()
-    sql = "INSERT INTO screening ( title, price ) VALUES( $1, $2) RETURNING id"
-    values = [@title, @price]
-    visit = SqlRunner.run( sql,values ).first
-    @id = visit['id'].to_i
+    sql = "INSERT INTO screenings ( film_id, start_time, empty_seats ) VALUES( $1, $2, $3) RETURNING id"
+    values = [@film_id, @start_time, @empty_seats]
+    result = SqlRunner.run( sql, values )[0]
+    @id = result['id'].to_i
   end
 
   def self.all()

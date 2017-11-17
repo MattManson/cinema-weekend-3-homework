@@ -33,4 +33,22 @@ class Film
     SqlRunner.run(sql, values)
   end
 
+  def customers_gonna_see_it
+    sql = "SELECT customers.* FROM customers
+    INNER JOIN tickets
+    ON tickets.customer_id = customers.id
+    WHERE tickets.film_id = $1"
+    values = [@id]
+    people = SqlRunner.run(sql, values)
+    result = people.map { |person| Customer.new( person ) }
+    return result
+  end
+
+  def customers_coming
+    sql = "SELECT tickets.* FROM tickets WHERE film_id = $1"
+    values = [@id]
+    result = SqlRunner.run(sql, values)
+    return result.count
+  end
+
 end

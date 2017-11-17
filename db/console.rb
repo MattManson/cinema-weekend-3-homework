@@ -1,4 +1,5 @@
 require( 'pry-byebug' )
+require('pp')
 require_relative( '../models/ticket' )
 require_relative( '../models/customer' )
 require_relative( '../models/film' )
@@ -45,27 +46,35 @@ ticket8 = Ticket.new({'film_id' => film2.id, 'customer_id' => customer4.id})
 ticket8.save
 ticket9 = Ticket.new({'film_id' => film1.id, 'customer_id' => customer1.id})
 ticket9.save
-# screening1 = Screening.new({'film_id' => film1.id, 'start_time' => '2017-01-08 04:00:00', 'empty_seats' => 20})
-# screening1.save
-# screening2 = Screening.new({'film_id' => film2.id, 'start_time' => '2017-01-09 04:00:00', 'empty_seats' => 15})
-# screening2.save
-# screening3 = Screening.new({'film_id' => film3.id, 'start_time' => '2017-01-10 04:00:00', 'empty_seats' => 1})
-# screening3.save
-# screening4 = Screening.new({'film_id' => film4.id, 'start_time' => '2017-01-11 04:00:00', 'empty_seats' => 20})
-# screening4.save
-# screening5 = Screening.new({'film_id' => film4.id, 'start_time' => '2017-01-12 04:00:00', 'empty_seats' => 10})
-# screening5.save
 
-# customer1.buy_ticket(screening2)
-# customer2.buy_ticket(screening2)
-# customer3.buy_ticket(screening2)
-# customer4.buy_ticket(screening2)
-#
-# customer1.buy_ticket(screening3)
-#
-# customer1.buy_ticket(screening4)
-# customer2.buy_ticket(screening4)
-# customer3.buy_ticket(screening5)
+movies = customer1.films_cust_gonna_see
+peoples = film2.customers_gonna_see_it
+
+
+screening1 = Screening.new({'film_id' => film1.id, 'start_time' => '2017-01-08 04:00:00', 'empty_seats' => 20})
+screening1.save
+screening2 = Screening.new({'film_id' => film2.id, 'start_time' => '2017-01-09 04:00:00', 'empty_seats' => 15})
+screening2.save
+screening3 = Screening.new({'film_id' => film3.id, 'start_time' => '2017-01-10 04:00:00', 'empty_seats' => 1})
+screening3.save
+screening4 = Screening.new({'film_id' => film4.id, 'start_time' => '2017-01-11 04:00:00', 'empty_seats' => 20})
+screening4.save
+screening5 = Screening.new({'film_id' => film4.id, 'start_time' => '2017-01-12 04:00:00', 'empty_seats' => 10})
+screening5.save
+
+customer1.buy_ticket(screening2)
+customer2.buy_ticket(screening2)
+customer3.buy_ticket(screening2)
+customer4.buy_ticket(screening2)
+
+customer1.buy_ticket(screening3)
+
+customer1.buy_ticket(screening4)
+customer2.buy_ticket(screening4)
+customer3.buy_ticket(screening5)
+
+many = film2.customers_coming
+
 
 # Screening.most_popular should return screening2
 binding.pry
