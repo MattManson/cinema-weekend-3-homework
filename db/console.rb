@@ -5,8 +5,8 @@ require_relative( '../models/customer' )
 require_relative( '../models/film' )
 require_relative( '../models/screening' )
 
-# Ticket.delete_all()
-# Screening.delete_all()
+Ticket.delete_all()
+Screening.delete_all()
 Customer.delete_all()
 Film.delete_all()
 
@@ -76,6 +76,7 @@ customer3.buy_ticket(screening5)
 many = film2.customers_coming
 
 
-# Screening.most_popular should return screening2
+popular = Screening.most_popular
+ # should return screening2
 binding.pry
 nil

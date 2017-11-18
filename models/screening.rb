@@ -21,8 +21,8 @@ class  Screening
   def self.all()
     sql = "SELECT * FROM films"
     values = []
-    visits = SqlRunner.run(sql, values)
-    result = visits.map { |film| Film.new( film ) }
+    screenins = SqlRunner.run(sql, values)
+    result = screenings.map { |film| Film.new( film ) }
     return result
   end
 
@@ -32,5 +32,16 @@ class  Screening
     SqlRunner.run(sql, values)
   end
 
+  def self.most_popular
+    sql = "SELECT films.title, COUNT(films.id) AS most_frequent
+      FROM films
+      JOIN tickets
+      ON films.id = tickets.film_id
+      GROUP BY films.id
+      ORDER BY COUNT(films.id) DESC"
+    values = []
+    result = SqlRunner.run(sql, values)
+    return result.map { |film| Film.new( film ) }[0]
+  end
 
 end
