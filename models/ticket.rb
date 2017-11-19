@@ -1,4 +1,7 @@
 require_relative('../db/sql_runner.rb')
+require_relative('customer')
+require_relative('film')
+require_relative('screening')
 
 class Ticket
 
@@ -30,6 +33,14 @@ class Ticket
     sql = "DELETE FROM tickets"
     values = []
     SqlRunner.run(sql, values)
+  end
+
+  def update
+    sql = "UPDATE tickets
+    SET (customer_id, film_id, screening_id) = ($1, $2, $3)
+    WHERE id = $4"
+    values = [@customer_id, @film_id, @screening_id, @id]
+    SqlRunner.run(sql,values)
   end
 
 end

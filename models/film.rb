@@ -1,11 +1,14 @@
 require_relative('../db/sql_runner.rb')
+require_relative('ticket')
+require_relative('customer')
+require_relative('screening')
 
 
 class Film
 
   attr_accessor :name, :price
   attr_reader :id
-  
+
   def initialize (options)
     @id = options['id'].to_i
     @title = options['title']
@@ -32,6 +35,14 @@ class Film
     sql = "DELETE FROM films"
     values = []
     SqlRunner.run(sql, values)
+  end
+
+  def update
+    sql = "UPDATE films
+    SET (title, price) = ($1, $2)
+    WHERE id = $3"
+    values = [@title, @price, @id]
+    SqlRunner.run(sql,values)
   end
 
   def customers_gonna_see_it

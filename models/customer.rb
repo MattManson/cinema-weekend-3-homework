@@ -1,4 +1,7 @@
 require_relative('../db/sql_runner.rb')
+require_relative('ticket')
+require_relative('film')
+require_relative('screening')
 
 class Customer
 
@@ -71,6 +74,5 @@ class Customer
     result = SqlRunner.run(sql, values)
     return result.count
   end
-
 
 end

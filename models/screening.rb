@@ -1,4 +1,7 @@
 require_relative('../db/sql_runner.rb')
+require_relative('customer')
+require_relative('film')
+require_relative('ticket')
 
 class  Screening
 
@@ -17,6 +20,13 @@ class  Screening
     values = [@film_id, @start_time, @empty_seats]
     result = SqlRunner.run( sql, values )[0]
     @id = result['id'].to_i
+  end
+
+
+  def update
+    sql = "UPDATE screenings SET (film_id, start_time, empty_seats) = ($1, $2, $3) WHERE id = $4"
+    values = [@film_id, @start_time, @empty_seats, @id]
+    SqlRunner.run(sql,values)
   end
 
   def self.all()
