@@ -2,7 +2,8 @@ require_relative('../db/sql_runner.rb')
 
 class  Screening
 
-  attr_accessor :id, :datetime, :film_id
+  attr_accessor :datetime, :film_id
+  attr_reader :id
 
   def initialize (options)
     @id = options['id'].to_i
@@ -34,11 +35,11 @@ class  Screening
 
   def self.most_popular
     sql = "SELECT films.title, COUNT(films.id) AS most_frequent
-      FROM films
-      JOIN tickets
-      ON films.id = tickets.film_id
-      GROUP BY films.id
-      ORDER BY COUNT(films.id) DESC"
+    FROM films
+    JOIN tickets
+    ON films.id = tickets.film_id
+    GROUP BY films.id
+    ORDER BY COUNT(films.id) DESC"
     values = []
     result = SqlRunner.run(sql, values)
     return result.map { |film| Film.new( film ) }[0]
